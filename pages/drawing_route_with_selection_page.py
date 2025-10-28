@@ -1,24 +1,11 @@
 import allure
-
-from locators.drawing_route_locators import DrawingRouteLocators
-from locators.drawing_route_with_selection_locators import DrawingRouteWithSelectionLocators
 import data
-from locators.preparing_to_order_taxi_locators import PreparingToOrderTaxiLocators
+
+from locators.drawing_route_with_selection_locators import DrawingRouteWithSelectionLocators
 from pages.base_page import BasePage
 
 
 class DrawingRouteWithSelectionPage(BasePage):
-
-    @allure.step('Ввод разных адресов откуда/куда')
-    def input_different_point(self):
-        self.fill_input(DrawingRouteLocators.FROM_INPUT, data.ADDRESS1)
-        self.fill_input(DrawingRouteLocators.TO_INPUT, data.ADDRESS2)
-
-
-    @allure.step('Ввод одинаковых адресов откуда/куда')
-    def input_equal_point(self):
-        self.fill_input(DrawingRouteLocators.FROM_INPUT, data.ADDRESS1)
-        self.fill_input(DrawingRouteLocators.TO_INPUT, data.ADDRESS1)
 
 
     @allure.step('Проверить, что блок выбора маршрута отображается')
@@ -29,7 +16,7 @@ class DrawingRouteWithSelectionPage(BasePage):
 
     @allure.step('Проверить, что выбран режим "Оптимальный"')
     def check_optimal_mode(self):
-        assert self.check_displayed_element(PreparingToOrderTaxiLocators.OPTIMAL_MODE), \
+        assert self.check_displayed_element(DrawingRouteWithSelectionLocators.OPTIMAL_MODE), \
             'Режим "Оптимальный" не отображается'
 
 
@@ -45,13 +32,11 @@ class DrawingRouteWithSelectionPage(BasePage):
 
     @allure.step('Проверить отрисовку блока выбора маршрута при вводе разных адресов')
     def drawing_route_block_different_address(self):
-        self.input_different_point()
         self.check_route_block_displayed()
         self.check_optimal_mode()
 
 
     @allure.step('Проверить отрисовку блока выбора маршрута при вводе одинаковых адресов')
     def drawing_route_block_equal_address(self):
-        self.input_equal_point()
         self.check_route_block_displayed()
         self.check_equal_route_text()

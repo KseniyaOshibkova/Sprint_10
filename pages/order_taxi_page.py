@@ -133,3 +133,11 @@ class OrderTaxiPage(BasePage):
                 # возвращаем только цифры
                 return int(''.join(filter(str.isdigit, price_text)))
         raise ValueError(f"Тариф с названием '{fare_name}' не найден")
+
+    @allure.step("Проверяет, что при наведении на иконку тарифа отображается корректное описание")
+    def check_fare_description(self, fare_name, expected_description):
+        self.select_fare_by_name(fare_name)
+        actual_description = self.hover_fare_info_icon_by_name(fare_name)
+        assert actual_description == expected_description, (
+            f"Описание тарифа '{fare_name}' некорректно: ожидалось '{expected_description}', "
+            f"получено '{actual_description}'")

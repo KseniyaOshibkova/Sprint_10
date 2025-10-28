@@ -1,8 +1,8 @@
 from selenium.webdriver.common.by import By
 
 class PreparingToOrderTaxiLocators:
-    MODE_ACTIVE = By.XPATH, "//div[contains(@class, 'mode active')]"
     OPTIMAL_MODE = By.XPATH, "//div[contains(text(), 'Оптимальный')]"
+    MODE_ACTIVE = By.XPATH, "//div[contains(@class, 'mode active')]"
     FAST_MODE = By.XPATH, "//div[contains(text(), 'Быстрый')]"
     SVOY_MODE = By.XPATH, "//div[contains(text(), 'Свой')]"
     TYPES_ACTIVE = By.XPATH, "//div[contains(@class, 'types-container')]/div[contains(@class, 'type')]"

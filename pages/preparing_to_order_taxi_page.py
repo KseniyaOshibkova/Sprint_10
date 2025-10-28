@@ -1,18 +1,10 @@
 import allure
+
 from locators.preparing_to_order_taxi_locators import PreparingToOrderTaxiLocators
-from locators.drawing_route_locators import DrawingRouteLocators
-import data
 from pages.base_page import BasePage
 
 
 class PreparingToOrderTaxiPage(BasePage):
-
-    @allure.step("Ввод разных адресов 'Откуда' и 'Куда'")
-    def prepare_addresses(self):
-        """Вводит два разных предустановленных адреса"""
-        self.fill_input(DrawingRouteLocators.FROM_INPUT, data.ADDRESS1)
-        self.fill_input(DrawingRouteLocators.TO_INPUT, data.ADDRESS2)
-
 
     @allure.step("Выбор режима маршрута 'Оптимальный'")
     def select_optimal_route_mode(self):

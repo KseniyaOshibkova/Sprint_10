@@ -18,28 +18,28 @@ def driver():
     yield driver
     driver.quit()
 
-@pytest.fixture(scope='function', autouse=False)
+@pytest.fixture
 def drawing_route_page(driver):
     return DrawingRoutePage(driver)
 
-@pytest.fixture(scope='function', autouse=False)
+@pytest.fixture
 def order_taxi_page(driver):
     return OrderTaxiPage(driver)
 
-@pytest.fixture(scope='function', autouse=False)
+@pytest.fixture
 def preparing_to_order_taxi_page(driver):
     return PreparingToOrderTaxiPage(driver)
 
-@pytest.fixture(scope='function', autouse=False)
+@pytest.fixture
 def drawing_route_with_selection_page(driver):
     return DrawingRouteWithSelectionPage(driver)
 
 @pytest.fixture
-def prepared_order_taxi_page(drawing_route_with_selection_page, order_taxi_page):
+def prepared_order_taxi_page(drawing_route_page, order_taxi_page):
     """Фикстура, которая подготавливает маршрут и вызывает такси"""
     with allure.step("Подготовка маршрута для вызова такси"):
         with allure.step("Вводим разные адреса в поля 'Откуда' и 'Куда'"):
-            drawing_route_with_selection_page.input_different_point()
+            drawing_route_page.input_different_point()
 
         with allure.step("Выбираем быстрый маршрут"):
             order_taxi_page.select_fast_route()

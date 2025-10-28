@@ -9,15 +9,13 @@ class TestOrderTaxi:
         prepared_order_taxi_page.verify_all_fares_displayed()
         prepared_order_taxi_page.verify_active_fare_displayed()
 
+
     @allure.title("Проверка описания тарифов при наведении на иконку i")
     @pytest.mark.xfail(reason="Перепутаны описания тарифов")
     @pytest.mark.parametrize("fare_name, expected_description", data.RATES)
     def test_fares_tooltip_descriptions(self, driver, prepared_order_taxi_page, fare_name, expected_description):
-        prepared_order_taxi_page.select_fare_by_name(fare_name)
-        actual_description = prepared_order_taxi_page.hover_fare_info_icon_by_name(fare_name)
-        assert actual_description == expected_description, (
-            f"Описание тарифа '{fare_name}' некорректно: ожидалось '{expected_description}', "
-            f"получено '{actual_description}'")
+        prepared_order_taxi_page.check_fare_description(fare_name, expected_description)
+
 
     @allure.title("Проверка отображения блока заказа под тарифами")
     def test_order_fields_displayed(self, driver, prepared_order_taxi_page):
